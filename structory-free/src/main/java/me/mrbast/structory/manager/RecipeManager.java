@@ -44,6 +44,7 @@ public class RecipeManager {
         recipeKeys.clear();
         recipeGroups.clear();
         nonDeterministicRecipes.clear();
+        determinisciRecipes.clear();
 
     }
 
@@ -78,6 +79,7 @@ public class RecipeManager {
 
     public void registerRecipe(Recipe recipe) {
         this.recipes.put(recipe.getKey(), recipe);
+        this.recipeKeys.put(recipe.getKey().getKey(), recipe.getKey());
         if(!recipe.hasDeterministic()) {
             nonDeterministicRecipes.add(recipe.getKey());
             return;

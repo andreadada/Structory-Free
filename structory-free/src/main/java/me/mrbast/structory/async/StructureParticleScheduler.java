@@ -3,10 +3,7 @@ package me.mrbast.structory.async;
 import me.mrbast.structory.Structory;
 import me.mrbast.structory.particle.AltarParticle;
 import me.mrbast.structory.structure.Structure;
-import me.mrbast.structory.util.SchedulerUtil;
 import org.bukkit.scheduler.BukkitTask;
-
-import java.util.concurrent.TimeUnit;
 
 public class StructureParticleScheduler {
 
@@ -18,6 +15,7 @@ public class StructureParticleScheduler {
     }
 
     private final StructureParticleRunnable runnable = new StructureParticleRunnable();
+    private BukkitTask task;
 
     private StructureParticleScheduler(){
 
@@ -31,11 +29,16 @@ public class StructureParticleScheduler {
     }
 
 
-    public void start(){
+    public synchronized void start(){
+        if (task != null && !task.isCancelled()) return;
+        Structory plugin = Structory.getPlugin(Structory.class);
+        task = plugin.getServer().getScheduler().runTaskTimer(plugin, runnable, 20L, 20L);
+    }
 
-        SchedulerUtil.scheduleRepeatingTask("particle", runnable, 1, 1,  TimeUnit.SECONDS);
-        //task = Structory.getPlugin(Structory.class).getServer().getScheduler().runTaskTimerAsynchronously(Structory.getPlugin(Structory.class), runnable,  20, 20);
-
+    public synchronized void stop() {
+        if (task == null) return;
+        task.cancel();
+        task = null;
     }
 
 

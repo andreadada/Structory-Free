@@ -5,17 +5,15 @@ import me.mrbast.dadaconfig.logic.ConfigSection;
 import me.mrbast.dadaconfig.logic.ConfigurationParser;
 import me.mrbast.dadaconfig.logic.Parameters;
 import me.mrbast.dadaconfig.logic.Wrapper;
-import me.mrbast.structory.Structory;
 import me.mrbast.structory.itembuilder.ItemBuilder;
 import me.mrbast.structory.crafting.recipe.result.CustomItemResult;
 import me.mrbast.structory.crafting.recipe.result.ItemResult;
 import me.mrbast.structory.crafting.recipe.result.Result;
-import org.bukkit.NamespacedKey;
+import me.mrbast.structory.registry.TypeRegistry;
 import org.bukkit.util.Vector;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 
 public class ResultConfigParser implements ConfigurationParser<Result> {
@@ -24,12 +22,14 @@ public class ResultConfigParser implements ConfigurationParser<Result> {
         public abstract Optional<Result> parse(ConfigSection section);
     }
 
-    private static final Map<NamespacedKey, ResultParser> ingredients = new HashMap<>();
-    private static final Map<String, NamespacedKey> keys = new HashMap<>();
+    private static final TypeRegistry<ResultParser> TYPES = new TypeRegistry<>();
+
     public static void register(String name, ResultParser parser){
-        NamespacedKey key = new NamespacedKey(Structory.getPlugin(Structory.class), name);
-        keys.put(name, key);
-        ingredients.put(key, parser);
+        TYPES.register(name, parser);
+    }
+
+    public static Set<String> registeredTypes() {
+        return TYPES.names();
     }
     static {
 
@@ -75,7 +75,7 @@ public class ResultConfigParser implements ConfigurationParser<Result> {
         Optional<String> type_ =  section.readString("type");
         if(!type_.isPresent()) return Optional.empty();
 
-        ResultParser parser = ingredients.get(keys.get(type_.get().toLowerCase()));
+        ResultParser parser = TYPES.find(type_.get()).orElse(null);
         if(parser == null) return Optional.empty();
 
         return parser.parse(section);

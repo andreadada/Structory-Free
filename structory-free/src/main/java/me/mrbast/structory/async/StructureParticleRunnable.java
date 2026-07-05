@@ -3,11 +3,12 @@ package me.mrbast.structory.async;
 import me.mrbast.structory.particle.AltarParticle;
 import me.mrbast.structory.structure.Structure;
 
-import java.util.*;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class StructureParticleRunnable implements Runnable {
 
-    private final Map<Structure, AltarParticle> observers = Collections.synchronizedMap(new HashMap<>());
+    private final Map<Structure, AltarParticle> observers = new ConcurrentHashMap<>();
 
 
     protected StructureParticleRunnable(){
@@ -27,15 +28,10 @@ public class StructureParticleRunnable implements Runnable {
     @Override
     public void run() {
 
-        observers.entrySet().parallelStream().forEach(entry->{
-
-            Structure structure = entry.getKey();
-            AltarParticle particle = entry.getValue();
-
-            structure.getInstances().forEach(instance ->{
-              particle.show(instance.getData().getCenter());
-            });
-
-        });
+        new ConcurrentHashMap<>(observers).forEach((structure, particle) ->
+                structure.getInstances().forEach(instance ->
+                        particle.show(instance.getData().getCenter())
+                )
+        );
     }
 }

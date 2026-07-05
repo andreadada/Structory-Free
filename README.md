@@ -4,7 +4,7 @@ Repository pubblico della versione gratuita di Structory.
 
 ## Moduli
 
-- `structory-core`: API e implementazioni realmente condivise con Structory Premium.
+- `structory-core`: API, registro dei tipi, utilità temporali e scheduler condivisi con Structory Premium.
 - `structory-free`: plugin Bukkit/Paper gratuito e relative risorse.
 
 ## Dipendenze Dada
@@ -16,10 +16,11 @@ La build usa le versioni verificate sui rispettivi branch `main`:
 
 Finché questi artefatti non vengono pubblicati in un registry Maven, devono essere presenti nel repository Maven locale.
 
-## Build
+## Build e test
 
 ```powershell
+mvn clean verify
 mvn clean install
 ```
 
-Il JAR del plugin viene prodotto in `structory-free/target`.
+`verify` esegue i test di core e plugin. `install` pubblica `structory-core` nel repository Maven locale, rendendolo disponibile alla Premium. Il JAR della Free viene prodotto in `structory-free/target`.

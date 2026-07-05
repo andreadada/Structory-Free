@@ -37,7 +37,7 @@ public class Structory extends JavaPlugin {
     public void onEnable() {
 
 
-        SchedulerUtil.init();
+        SchedulerUtil.init(this);
 
         ConfigInit.init();
         Version.prepare(this);
@@ -94,6 +94,7 @@ public class Structory extends JavaPlugin {
         HandlerList.unregisterAll(this);
 
         CraftingOption.getInstance().dropAllRecipeItems();
+        StructureParticleScheduler.getInstance().stop();
         SchedulerUtil.shutdown();
         LOGGER.info("Plugin disabled ! :(");
         if (metrics != null) metrics.shutdown();

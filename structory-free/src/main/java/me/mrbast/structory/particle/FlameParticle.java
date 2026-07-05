@@ -1,7 +1,6 @@
 package me.mrbast.structory.particle;
 
 import me.mrbast.structory.enums.StructureSpacedKey;
-import me.mrbast.structory.util.SchedulerUtil;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
@@ -33,20 +32,17 @@ public class FlameParticle extends AltarParticle{
         Location loc = location.clone().add(centerOffset);
 
 
-        SchedulerUtil.async(()->{
-            for(int i = 0; i < amount; i++){
-                Objects.requireNonNull(loc.getWorld())
-                        .spawnParticle(particle,
-                                loc,
-                                count,
-                                ThreadLocalRandom.current().nextDouble(0.15),
-                                ThreadLocalRandom.current().nextDouble(0.02),
-                                ThreadLocalRandom.current().nextDouble(0.15),
-                                speed
-                        );
-            }
-            SchedulerUtil.sleep(200);
-        });
+        for(int i = 0; i < amount; i++){
+            Objects.requireNonNull(loc.getWorld())
+                    .spawnParticle(particle,
+                            loc,
+                            count,
+                            ThreadLocalRandom.current().nextDouble(0.15),
+                            ThreadLocalRandom.current().nextDouble(0.02),
+                            ThreadLocalRandom.current().nextDouble(0.15),
+                            speed
+                    );
+        }
 
 
     }
