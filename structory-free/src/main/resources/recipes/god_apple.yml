@@ -1,0 +1,30 @@
+strange_apple:
+  name: strange_apple
+  group: "GOD_APPLE"
+  ingredients:
+    one:
+      type: item
+      material: APPLE
+    two:
+      type: item
+      material: NETHER_WART
+  result:
+    one:
+      type: saveditem
+      offset: "0 0 0"
+      key: strangeapple
+
+god_apple:
+  name: god_apple
+  ingredients:
+    one:
+      type: saveditem
+      key: strangeapple
+    two:
+      type: item
+      material: GOLD_BLOCK
+  result:
+    one:
+      type: saveditem
+      offset: "0 0 0"
+      key: godapple

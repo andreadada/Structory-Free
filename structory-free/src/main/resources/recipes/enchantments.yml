@@ -1,0 +1,277 @@
+sharpness_1:
+  name: sharpness_1
+  ingredients:
+    one:
+      type: item
+      material: BOOK
+    two:
+      type: item
+      material: QUARTZ
+    three:
+      type: item
+      material: QUARTZ
+    four:
+      type: item
+      material: QUARTZ
+  result:
+    one:
+      type: item
+      offset: "0 0 0"
+      item:
+        material: ENCHANTED_BOOK
+        enchantments:
+          SHARPNESS: 1
+
+sharpness_2:
+  name: sharpness_2
+  ingredients:
+    one:
+      type: item
+      material: ENCHANTED_BOOK
+      enchantments:
+        SHARPNESS: 1
+    two:
+      type: item
+      material: QUARTZ
+    three:
+      type: item
+      material: QUARTZ
+    four:
+      type: item
+      material: QUARTZ
+    five:
+      type: item
+      material: QUARTZ
+  result:
+    one:
+      type: item
+      offset: "0 0 0"
+      item:
+        material: ENCHANTED_BOOK
+        enchantments:
+          SHARPNESS: 2
+
+sharpness_3:
+  name: sharpness_3
+  ingredients:
+    one:
+      type: item
+      material: ENCHANTED_BOOK
+      enchantments:
+        SHARPNESS: 2
+    two:
+      type: item
+      material: QUARTZ
+    three:
+      type: item
+      material: QUARTZ
+    four:
+      type: item
+      material: QUARTZ
+    five:
+      type: item
+      material: QUARTZ
+    six:
+      type: item
+      material: QUARTZ
+  result:
+    one:
+      type: item
+      offset: "0 0 0"
+      item:
+        material: ENCHANTED_BOOK
+        enchantments:
+          SHARPNESS: 3
+
+sharpness_4:
+  name: sharpness_4
+  ingredients:
+    one:
+      type: item
+      material: ENCHANTED_BOOK
+      enchantments:
+        SHARPNESS: 3
+    two:
+      type: item
+      material: QUARTZ
+    three:
+      type: item
+      material: QUARTZ
+    four:
+      type: item
+      material: QUARTZ
+    five:
+      type: item
+      material: QUARTZ
+    six:
+      type: item
+      material: QUARTZ
+    seven:
+      type: item
+      material: QUARTZ
+  result:
+    one:
+      type: item
+      offset: "0 0 0"
+      item:
+        material: ENCHANTED_BOOK
+        enchantments:
+          SHARPNESS: 4
+
+sharpness_5:
+  name: sharpness_5
+  ingredients:
+    one:
+      type: item
+      material: ENCHANTED_BOOK
+      enchantments:
+        SHARPNESS: 4
+    two:
+      type: item
+      material: QUARTZ
+    three:
+      type: item
+      material: QUARTZ
+    four:
+      type: item
+      material: QUARTZ
+    five:
+      type: item
+      material: QUARTZ
+    six:
+      type: item
+      material: QUARTZ
+    seven:
+      type: item
+      material: QUARTZ
+    eight:
+      type: item
+      material: QUARTZ
+  result:
+    one:
+      type: item
+      offset: "0 0 0"
+      item:
+        material: ENCHANTED_BOOK
+        enchantments:
+          SHARPNESS: 5
+
+protection_1:
+  name: protection_1
+  ingredients:
+    one:
+      type: item
+      material: BOOK
+    two:
+      type: item
+      material: IRON_INGOT
+    three:
+      type: item
+      material: IRON_INGOT
+    four:
+      type: item
+      material: IRON_INGOT
+  result:
+    one:
+      type: item
+      offset: "0 0 0"
+      item:
+        material: ENCHANTED_BOOK
+        enchantments:
+          PROTECTION: 1
+
+protection_2:
+  name: protection_2
+  ingredients:
+    one:
+      type: item
+      material: ENCHANTED_BOOK
+      enchantments:
+        PROTECTION: 1
+    two:
+      type: item
+      material: IRON_INGOT
+    three:
+      type: item
+      material: IRON_INGOT
+    four:
+      type: item
+      material: IRON_INGOT
+    five:
+      type: item
+      material: IRON_INGOT
+  result:
+    one:
+      type: item
+      offset: "0 0 0"
+      item:
+        material: ENCHANTED_BOOK
+        enchantments:
+          PROTECTION: 2
+
+protection_3:
+  name: protection_3
+  ingredients:
+    one:
+      type: item
+      material: ENCHANTED_BOOK
+      enchantments:
+        PROTECTION: 2
+    two:
+      type: item
+      material: IRON_INGOT
+    three:
+      type: item
+      material: IRON_INGOT
+    four:
+      type: item
+      material: IRON_INGOT
+    five:
+      type: item
+      material: IRON_INGOT
+    six:
+      type: item
+      material: IRON_INGOT
+  result:
+    one:
+      type: item
+      offset: "0 0 0"
+      item:
+        material: ENCHANTED_BOOK
+        enchantments:
+          PROTECTION: 3
+
+protection_4:
+  name: protection_4
+  ingredients:
+    one:
+      type: item
+      material: ENCHANTED_BOOK
+      enchantments:
+        PROTECTION: 3
+    two:
+      type: item
+      material: IRON_INGOT
+    three:
+      type: item
+      material: IRON_INGOT
+    four:
+      type: item
+      material: IRON_INGOT
+    five:
+      type: item
+      material: IRON_INGOT
+    six:
+      type: item
+      material: IRON_INGOT
+    seven:
+      type: item
+      material: IRON_INGOT
+  result:
+    one:
+      type: item
+      offset: "0 0 0"
+      item:
+        material: ENCHANTED_BOOK
+        enchantments:
+          PROTECTION: 4

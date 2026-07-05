@@ -1,0 +1,106 @@
+mob_spawner:
+  name: empty_spawner
+  ingredients:
+    1:
+      type: item
+      material: IRON_BLOCK
+    2:
+      type: item
+      material: IRON_BLOCK
+    3:
+      type: item
+      material: IRON_BLOCK
+    4:
+      type: item
+      material: IRON_BLOCK
+    5:
+      type: item
+      material: IRON_BARS
+    6:
+      type: item
+      material: IRON_BARS
+    7:
+      type: item
+      material: IRON_BARS
+    8:
+      type: item
+      material: IRON_BARS
+  result:
+    one:
+      type: item
+      offset: "0 0 0"
+      item:
+        material: SPAWNER
+        set:
+          empty:
+            type: BOOLEAN
+            value: true
+
+zombie_spawner:
+  name: zombie_spawner
+  ingredients:
+    1:
+      type: item
+      material: SPAWNER
+      has:
+        empty:
+          type: BOOLEAN
+    2:
+      type: item
+      material: ROTTEN_FLESH
+    3:
+      type: item
+      material: NETHER_STAR
+  result:
+    one:
+      type: item
+      offset: "0 0 0"
+      item:
+        material: SPAWNER
+        type: ZOMBIE
+
+spider_spawner:
+  name: spider_spawner
+  ingredients:
+    1:
+      type: item
+      material: SPAWNER
+      has:
+        empty:
+          type: BOOLEAN
+    2:
+      type: item
+      material: SPIDER_EYE
+    3:
+      type: item
+      material: NETHER_STAR
+  result:
+    one:
+      type: item
+      offset: "0 0 0"
+      item:
+        material: SPAWNER
+        type: SPIDER
+
+creeper_spawner:
+  name: creeper_spawner
+  ingredients:
+    1:
+      type: item
+      material: SPAWNER
+      has:
+        empty:
+          type: BOOLEAN
+    2:
+      type: item
+      material: GUNPOWDER
+    3:
+      type: item
+      material: NETHER_STAR
+  result:
+    one:
+      type: item
+      offset: "0 0 0"
+      item:
+        material: SPAWNER
+        type: CREEPER

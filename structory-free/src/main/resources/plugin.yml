@@ -1,0 +1,45 @@
+main: me.mrbast.structory.Structory
+version: 1.1.12
+name: Structory
+author: MrBast
+description: Simple structures plugin
+api-version: 1.13
+
+commands:
+  structory:
+    description: Main structory command
+
+permissions:
+  structory.cmd.use:
+    description: Allows /structory command
+    default: op
+  structory.cmd.item.save:
+    description: Allows /structory item save <name>
+    default: op
+  structory.cmd.item.delete:
+    description: Allows /structory item delete <name>
+    default: op
+  structory.cmd.item.get:
+    description: Allows /structory item get <name>
+    default: op
+  structory.cmd.item.replace:
+    description: Allows /structory item replace <name>, instead of delete, save and reload
+    default: op
+  structory.cmd.*:
+    description: Wildcard permission
+    default: op
+    children:
+      structory.cmd.item.save: true
+      structory.cmd.item.get: true
+      structory.cmd.item.delete: true
+      structory.cmd.item.replace: true
+      structory.cmd.use: true
+  structory.*:
+    description: Wildcard permission
+    default: op
+    children:
+      structory.cmd.*: true
+
+#libraries:
+#  - org.incendo:cloud-core:2.0.0-rc.2
+#  - org.incendo:cloud-paper:2.0.0-beta.8

@@ -1,0 +1,19 @@
+nether_star:
+  name: nether_star
+  ingredients:
+    one:
+      type: item
+      material: WITHER_SKELETON_SKULL
+    two:
+      type: item
+      material: WITHER_SKELETON_SKULL
+    three:
+      type: item
+      material: WITHER_SKELETON_SKULL
+  result:
+    one:
+      type: item
+      offset: "0 0 0"
+      item:
+        material: NETHER_STAR
+        model: 10101

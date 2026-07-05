@@ -1,0 +1,18 @@
+#DO NOT CHANGE THIS
+version: 1.1.12
+
+metrics:
+  enable: true
+
+scheduler:
+  core_pool_size: 2 #You should have at least 1 or, better, 2
+  max_pool_size: 2 #You should have at least 2
+  keep_alive_time: 60
+  on_every:
+    check: 500 #every 500 ms check for events to fire
+
+structures:
+  disable_item_pickup: true #true = disable item pickup, player must take the item by rightclicking | false = check 'shift_to_remove_item'
+  shift_to_remove_item: false #true = may cause lag | false = cancel item pickup if shifting probably way more efficient
+  distance: 32.0 #min. distance between each altar
+  break_confirm_time: 5000 #in ms
