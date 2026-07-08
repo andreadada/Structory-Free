@@ -90,7 +90,7 @@ public class CraftingInteractionListener implements Listener {
                     ListenerManager.getInstance().call(PlayerInteractStructureEvent);
                     if(PlayerInteractStructureEvent.isCancelled()) return;
 
-                    SchedulerUtil.sync(()->{
+                    SchedulerUtil.entity(event.getPlayer(), ()->{
                         ItemStack toSet = event.getItem();
                         if(toSet == null) {
                             ItemStack took = crafting.take(slot);

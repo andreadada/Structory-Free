@@ -5,7 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 
 public class StructureProtection {
@@ -17,7 +17,7 @@ public class StructureProtection {
     private StructureProtection() {}
 
 
-    private final Map<Location, StructureInstance> blocks = new HashMap<Location, StructureInstance>();
+    private final Map<Location, StructureInstance> blocks = new ConcurrentHashMap<>();
 
     public void add(Location location, StructureInstance structure) {
         this.blocks.put(location, structure);

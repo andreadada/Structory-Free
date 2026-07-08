@@ -27,7 +27,7 @@ import java.util.function.Predicate;
 public class ItemIngredient extends Ingredient implements HasRecipeSlot {
 
     protected final Set<Predicate<ItemStack>> filters = new HashSet<>();
-    private final Map<StructureInstance, RecipeSlot> CACHE = new HashMap<>();
+    private final Map<StructureInstance, RecipeSlot> CACHE = new java.util.concurrent.ConcurrentHashMap<>();
 
     private boolean hasDeterministic = false;
     private DeterministicItem deterministicItem;
@@ -189,7 +189,7 @@ public class ItemIngredient extends Ingredient implements HasRecipeSlot {
             craftingData.consume(slot.getSlotLocation().clone().add(0, finalYOffset, 0));
         });
 
-        SchedulerUtil.safe(slot::remove);
+        SchedulerUtil.region(slot.getSlotLocation(), slot::remove);
         CACHE.remove(recipeContext.getInstance());
     }
 

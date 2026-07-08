@@ -16,6 +16,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.BlockVector;
+import me.mrbast.structory.util.SchedulerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,12 +26,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CustomBlockData implements PersistentDataContainer {
-    private static final Set<Map.Entry<UUID, BlockVector>> DIRTY_BLOCKS = new HashSet();
+    private static final Set<Map.Entry<UUID, BlockVector>> DIRTY_BLOCKS = ConcurrentHashMap.newKeySet();
     private static final PersistentDataType<?, ?>[] PRIMITIVE_DATA_TYPES;
     private static final NamespacedKey PERSISTENCE_KEY;
     private static final Pattern KEY_REGEX;
@@ -75,7 +77,7 @@ public class CustomBlockData implements PersistentDataContainer {
 
     static void setDirty(Plugin plugin, Map.Entry<UUID, BlockVector> blockEntry) {
         DIRTY_BLOCKS.add(blockEntry);
-        Bukkit.getScheduler().runTask(plugin, () -> {
+        SchedulerUtil.global(() -> {
             DIRTY_BLOCKS.remove(blockEntry);
         });
     }

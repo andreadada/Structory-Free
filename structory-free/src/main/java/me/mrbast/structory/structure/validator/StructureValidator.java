@@ -81,7 +81,7 @@ public class StructureValidator {
         ListenerManager.getInstance().call(new AltarCreateEvent(event, inst));
         StructureInstanceManager.getInstance().register(inst);
         inst.init();
-        SchedulerUtil.async(()->new SingleStructureInstanceConfig(inst).save());
+        SchedulerUtil.region(inst.getData().getCenter(), () -> new SingleStructureInstanceConfig(inst).save());
 
     }
 

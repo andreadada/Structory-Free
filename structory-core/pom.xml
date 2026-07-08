@@ -19,6 +19,10 @@
             <artifactId>DadaConfig</artifactId>
         </dependency>
         <dependency>
+            <groupId>me.mrbast</groupId>
+            <artifactId>Platform</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
             <scope>provided</scope>

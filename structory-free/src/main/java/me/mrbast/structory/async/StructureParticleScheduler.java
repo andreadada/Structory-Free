@@ -1,9 +1,9 @@
 package me.mrbast.structory.async;
 
-import me.mrbast.structory.Structory;
+import me.mrbast.platform.scheduler.PlatformTask;
 import me.mrbast.structory.particle.AltarParticle;
 import me.mrbast.structory.structure.Structure;
-import org.bukkit.scheduler.BukkitTask;
+import me.mrbast.structory.util.SchedulerUtil;
 
 public class StructureParticleScheduler {
 
@@ -15,7 +15,7 @@ public class StructureParticleScheduler {
     }
 
     private final StructureParticleRunnable runnable = new StructureParticleRunnable();
-    private BukkitTask task;
+    private PlatformTask task;
 
     private StructureParticleScheduler(){
 
@@ -31,8 +31,7 @@ public class StructureParticleScheduler {
 
     public synchronized void start(){
         if (task != null && !task.isCancelled()) return;
-        Structory plugin = Structory.getPlugin(Structory.class);
-        task = plugin.getServer().getScheduler().runTaskTimer(plugin, runnable, 20L, 20L);
+        task = SchedulerUtil.globalRepeating(runnable, 20L, 20L);
     }
 
     public synchronized void stop() {

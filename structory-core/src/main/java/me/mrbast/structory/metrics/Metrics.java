@@ -1,4 +1,8 @@
-package me.mrbast.structory.metrics;/*
+package me.mrbast.structory.metrics;
+
+import me.mrbast.structory.util.SchedulerUtil;
+
+/*
  * This Metrics class was auto-generated and can be copied into your project if you are
  * not using a build tool like Gradle or Maven for dependency management.
  *
@@ -99,7 +103,7 @@ public class Metrics {
                         enabled,
                         this::appendPlatformData,
                         this::appendServiceData,
-                        submitDataTask -> Bukkit.getScheduler().runTask(plugin, submitDataTask),
+                        SchedulerUtil::global,
                         plugin::isEnabled,
                         (message, error) -> this.plugin.getLogger().log(Level.WARNING, message, error),
                         (message) -> this.plugin.getLogger().log(Level.INFO, message),

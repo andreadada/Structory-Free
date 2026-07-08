@@ -10,6 +10,7 @@ import org.bukkit.NamespacedKey;
 
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class RecipeManager {
 
@@ -18,12 +19,12 @@ public class RecipeManager {
     public static RecipeManager getInstance() { return INSTANCE;}
 
 
-    private final Map<NamespacedKey, Recipe> recipes = new HashMap<>();
-    private final Map<String, NamespacedKey> recipeKeys = new HashMap<>();
-    private final Map<String, RecipeGroup> recipeGroups = new HashMap<>();
+    private final Map<NamespacedKey, Recipe> recipes = new ConcurrentHashMap<>();
+    private final Map<String, NamespacedKey> recipeKeys = new ConcurrentHashMap<>();
+    private final Map<String, RecipeGroup> recipeGroups = new ConcurrentHashMap<>();
 
 
-    private final Set<NamespacedKey> nonDeterministicRecipes = new HashSet<>();
+    private final Set<NamespacedKey> nonDeterministicRecipes = ConcurrentHashMap.newKeySet();
     /**
      * Recipes that have at least 1 deterministic filter
      * Like isTypeOf, or HasModelData, etc...
@@ -31,7 +32,7 @@ public class RecipeManager {
      * recipe is that item from.
      * For example inserting: 3 wither skull
      */
-    private final Map<Set<DeterministicItem>, Set<NamespacedKey>> determinisciRecipes = new HashMap<>();
+    private final Map<Set<DeterministicItem>, Set<NamespacedKey>> determinisciRecipes = new ConcurrentHashMap<>();
 
     public RecipeManager() {
 
@@ -66,10 +67,12 @@ public class RecipeManager {
      */
 
     public Optional<Recipe> getRecipe(NamespacedKey key) {
+        if (key == null) return Optional.empty();
         return Optional.ofNullable(recipes.get(key));
     }
     public Optional<Recipe> getRecipe(String key) {
-        return getRecipe(recipeKeys.getOrDefault(key, null));
+        if (key == null) return Optional.empty();
+        return getRecipe(recipeKeys.get(key));
     }
 
 
@@ -86,7 +89,7 @@ public class RecipeManager {
         }
 
         Set<DeterministicItem> deterministicItems = recipe.getDeterministicItems();
-        Set<NamespacedKey> keys =  determinisciRecipes.computeIfAbsent(deterministicItems, k -> new HashSet<>());
+        Set<NamespacedKey> keys =  determinisciRecipes.computeIfAbsent(deterministicItems, k -> ConcurrentHashMap.newKeySet());
         keys.add(recipe.getKey());
 
     }

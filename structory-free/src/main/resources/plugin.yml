@@ -4,6 +4,7 @@ name: Structory
 author: MrBast
 description: Simple structures plugin
 api-version: 1.13
+folia-supported: true
 
 commands:
   structory:

@@ -37,13 +37,13 @@ public class Structory extends JavaPlugin {
     public void onEnable() {
 
 
-        SchedulerUtil.init(this);
-
-        ConfigInit.init();
         Version.prepare(this);
         platform = Platform.prepare(this);
+        SchedulerUtil.init(this, platform);
 
-        guiManager = new BukkitGuiManager(this);
+        ConfigInit.init();
+
+        guiManager = new BukkitGuiManager(this, (player, task) -> platform.runFor(player, task));
         guiManager.register();
 
         Builder.init();

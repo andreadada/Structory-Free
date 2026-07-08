@@ -19,14 +19,14 @@ public class Crafting {
     private final StructureInstance instance;
     //private List<DiscoveredRecipe> discoveredRecipes;
     private Set<NamespacedKey> discoveredRecipes;
-    private final Map<Integer, RecipeSlot> recipeSlots = new HashMap<>();
+    private final Map<Integer, RecipeSlot> recipeSlots = new java.util.concurrent.ConcurrentHashMap<>();
 
-    private boolean busy = false;
+    private volatile boolean busy = false;
 
 
     public Crafting(StructureInstance instance) {
         this.instance = instance;
-        discoveredRecipes = new HashSet<>();
+        discoveredRecipes = java.util.concurrent.ConcurrentHashMap.newKeySet();
     }
 
 
@@ -112,9 +112,8 @@ public class Crafting {
 
     public void craft(RecipeContext recipeContext, Recipe recipe){
 
-        SchedulerUtil.asyncThenSync(()->{
+        SchedulerUtil.region(instance.getData().getCenter(), () -> {
             recipe.consume(recipeContext);
-        }, ()-> {
             CraftingOption.getInstance().getCraftingData(instance.getData().getStructure()).ifPresent(craftingData->{
                 craftingData.craft(instance.getData().getCenter().clone().add(0.5, 1, 0.5));
             });

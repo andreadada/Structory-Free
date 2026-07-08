@@ -6,6 +6,7 @@ import org.bukkit.NamespacedKey;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class StructureManager {
 
@@ -15,8 +16,8 @@ public class StructureManager {
 
     private StructureManager() { }
 
-    private final Map<NamespacedKey, Structure> structures = new HashMap<>();
-    private final Map<String, NamespacedKey> structuresName = new HashMap<>();
+    private final Map<NamespacedKey, Structure> structures = new ConcurrentHashMap<>();
+    private final Map<String, NamespacedKey> structuresName = new ConcurrentHashMap<>();
 
 
     public void registerStructure(Structure structure) {
@@ -39,7 +40,8 @@ public class StructureManager {
         return structures.get(uuid);
     }
     public Structure getStructureByName(String name){
-        return structures.get(structuresName.get(name));
+        NamespacedKey key = structuresName.get(name);
+        return key == null ? null : structures.get(key);
     }
 
     public Optional<Structure> getStructureFiltered(Predicate<Structure> condition){

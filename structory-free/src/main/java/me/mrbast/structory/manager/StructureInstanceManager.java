@@ -7,13 +7,14 @@ import me.mrbast.structory.structure.grief.StructureProtection;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class StructureInstanceManager {
 
     private static final StructureInstanceManager instance = new StructureInstanceManager();
     public static StructureInstanceManager getInstance() { return instance; }
 
-    private final Map<UUID, StructureInstance> structureInstances = new HashMap<>();
+    private final Map<UUID, StructureInstance> structureInstances = new ConcurrentHashMap<>();
 
     private StructureInstanceManager() {}
 

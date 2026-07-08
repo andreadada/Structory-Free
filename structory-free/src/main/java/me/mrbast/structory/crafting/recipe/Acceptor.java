@@ -48,7 +48,11 @@ public class Acceptor {
 
     public Set<DeterministicItem> getDeterministicItems() {
         Map<DeterministicItem, Integer> amount = new HashMap<>();
-        itemIngredients.stream().filter(ItemIngredient::hasDeterministic).map(ItemIngredient::getDeterministicItem).forEach(item->{
+        itemIngredients.stream()
+                .filter(ItemIngredient::hasDeterministic)
+                .map(ItemIngredient::getDeterministicItem)
+                .filter(Objects::nonNull)
+                .forEach(item->{
             amount.put(item, amount.getOrDefault(item, 0) + 1);
         });
         Set<DeterministicItem> deterministicItems = new HashSet<>();

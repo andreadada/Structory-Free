@@ -17,13 +17,14 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.Vector;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class RecipeSlot {
 
     /***
      * CACHING FOR PICKUP ITEM EVENT
      */
-    private static final Map<Item, RecipeSlot> itemDataMap = new HashMap<>();
+    private static final Map<Item, RecipeSlot> itemDataMap = new ConcurrentHashMap<>();
     public static Optional<RecipeSlot> getRecipeSlot(Item item){
         return Optional.ofNullable(itemDataMap.get(item));
     }

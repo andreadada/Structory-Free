@@ -27,6 +27,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.checkerframework.checker.units.qual.N;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CraftingOption implements Option, InteractableOption, HasInstanceData {
 
@@ -41,13 +42,13 @@ public class CraftingOption implements Option, InteractableOption, HasInstanceDa
     /**
      * Crafting real data of the structure instance
      */
-    private final Map<StructureInstance, Crafting> craftingMap= new HashMap<>();
+    private final Map<StructureInstance, Crafting> craftingMap= new ConcurrentHashMap<>();
     /**
      * Structure's Crafting Settings
      */
-    private final Map<Structure, CraftingSettings> craftingDataMap = new HashMap<>();
+    private final Map<Structure, CraftingSettings> craftingDataMap = new ConcurrentHashMap<>();
 
-    private final Map<StructureInstance, Set<NamespacedKey>> loadeEventDiscoveredRecipe = new HashMap<>();
+    private final Map<StructureInstance, Set<NamespacedKey>> loadeEventDiscoveredRecipe = new ConcurrentHashMap<>();
 
     private final InteractListener interactListener = ((instance, event) -> this.onInteract(event, instance));
 
@@ -230,7 +231,7 @@ public class CraftingOption implements Option, InteractableOption, HasInstanceDa
 
             String recipes = craftingSection.getString("discoveredRecipes");
             if(recipes == null || recipes.isEmpty()) return;
-            HashSet<NamespacedKey> keys = new HashSet<>();
+            Set<NamespacedKey> keys = ConcurrentHashMap.newKeySet();
             loadeEventDiscoveredRecipe.put(instance, keys);
             Arrays.stream(recipes.split("-")).forEach(key->{
                 keys.add(NamespacedKey.fromString(key));

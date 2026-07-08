@@ -8,7 +8,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -17,8 +17,8 @@ public class SavedItemManager {
     private static final SavedItemManager instance = new SavedItemManager();
     public static SavedItemManager getInstance() { return instance; }
     private SavedItemManager() { }
-    private final Map<NamespacedKey, SavedItemProvider> items = new HashMap<>();
-    private final Map<String, NamespacedKey> keys = new HashMap<>();
+    private final Map<NamespacedKey, SavedItemProvider> items = new ConcurrentHashMap<>();
+    private final Map<String, NamespacedKey> keys = new ConcurrentHashMap<>();
 
     public void register(SavedItemProvider item) {
 

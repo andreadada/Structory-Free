@@ -26,7 +26,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
@@ -37,7 +37,7 @@ public class AltarGriefListener implements Listener {
 
 
     private final CraftingOption craftingOption;
-    private final Map<StructureInstance, Long> repeatAltarBlockBreak = new HashMap<>();
+    private final Map<StructureInstance, Long> repeatAltarBlockBreak = new ConcurrentHashMap<>();
 
 
     public AltarGriefListener() {
@@ -135,11 +135,11 @@ public class AltarGriefListener implements Listener {
             if(instance == null) continue;
             ((Cancellable) event).setCancelled(true);
 
-            SchedulerUtil.waitTickThenSync(1, ()->{
+            SchedulerUtil.regionLater(block.getLocation(), ()->{
                 block.setBlockData(data);
                 old.update();
 
-            });
+            }, 1);
 
 
 
@@ -242,12 +242,12 @@ public class AltarGriefListener implements Listener {
             Skull skull = (Skull) block.getState();
             BlockData data = skull.getBlockData();
 
-            SchedulerUtil.waitTickThenSync(1, ()->{
+            SchedulerUtil.regionLater(block.getLocation(), ()->{
                 Block bl = world.getBlockAt(x,y,z);
                 bl.setBlockData(data);
                 bl.getState().update();
 
-            });
+            }, 1);
         }
 
 

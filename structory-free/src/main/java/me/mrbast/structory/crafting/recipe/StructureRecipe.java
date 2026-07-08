@@ -130,11 +130,10 @@ public class StructureRecipe implements Recipe{
 
 
         acceptor.getIngredients().forEach(ingredient -> {
-            SchedulerUtil.bukkitSync(()->ingredient.consume(recipeContext));
+            ingredient.consume(recipeContext);
         });
         acceptor.getItemIngredients().forEach(itemIngredient -> {
-            SchedulerUtil.bukkitSync(()->itemIngredient.consume(recipeContext));
-            SchedulerUtil.sleep(1000);
+            itemIngredient.consume(recipeContext);
         });
 
 

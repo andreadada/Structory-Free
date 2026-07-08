@@ -2,6 +2,7 @@ package me.mrbast.structory.async;
 
 import me.mrbast.structory.particle.AltarParticle;
 import me.mrbast.structory.structure.Structure;
+import me.mrbast.structory.util.SchedulerUtil;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,9 +30,9 @@ public class StructureParticleRunnable implements Runnable {
     public void run() {
 
         new ConcurrentHashMap<>(observers).forEach((structure, particle) ->
-                structure.getInstances().forEach(instance ->
-                        particle.show(instance.getData().getCenter())
-                )
-        );
+                structure.getInstances().forEach(instance -> {
+                    org.bukkit.Location center = instance.getData().getCenter();
+                    SchedulerUtil.region(center, () -> particle.show(center));
+                }));
     }
 }

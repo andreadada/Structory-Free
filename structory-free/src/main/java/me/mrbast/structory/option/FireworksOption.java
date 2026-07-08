@@ -34,15 +34,11 @@ public class FireworksOption implements Option{
 
         public Fireworks(int amount, int power, boolean flicker, Color[] mainColor, Color[] fadeColor) {
 
-            Bukkit.getServer().getScheduler().runTaskAsynchronously(Structory.getPlugin(Structory.class), ()->{
-                fireworksSupplier = instance -> {
-                    for(int i = 0; i < amount; i++) {
-
-                        FireworkUtil.prepareFirework(instance.getData().getCenter().clone().add(0.5, 1.5,0.5), 0, flicker, mainColor, fadeColor).detonate();
-                    }
-                };
-
-            });
+            fireworksSupplier = instance -> {
+                for(int i = 0; i < amount; i++) {
+                    FireworkUtil.prepareFirework(instance.getData().getCenter().clone().add(0.5, 1.5,0.5), 0, flicker, mainColor, fadeColor).detonate();
+                }
+            };
 
         }
     }

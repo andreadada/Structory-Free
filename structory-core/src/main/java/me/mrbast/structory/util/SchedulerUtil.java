@@ -1,8 +1,11 @@
 package me.mrbast.structory.util;
 
+import me.mrbast.platform.Platform;
+import me.mrbast.platform.scheduler.PlatformTask;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +22,15 @@ import java.util.concurrent.TimeUnit;
 public final class SchedulerUtil {
 
     private static JavaPlugin plugin;
+    private static Platform platform;
     private static AsyncExecutor asyncExecutor;
 
     private SchedulerUtil() {
     }
 
-    public static void init(JavaPlugin owningPlugin) {
+    public static void init(JavaPlugin owningPlugin, Platform owningPlatform) {
         plugin = Objects.requireNonNull(owningPlugin, "owningPlugin");
+        platform = Objects.requireNonNull(owningPlatform, "owningPlatform");
         asyncExecutor = new AsyncExecutor();
     }
 
@@ -33,8 +38,46 @@ public final class SchedulerUtil {
         return requireExecutor();
     }
 
-    public static BukkitTask sync(Runnable runnable) {
-        return requirePlugin().getServer().getScheduler().runTask(requirePlugin(), runnable);
+    public static PlatformTask sync(Runnable runnable) {
+        return global(runnable);
+    }
+
+    public static PlatformTask global(Runnable runnable) {
+        return requirePlatform().scheduleGlobal(runnable);
+    }
+
+    public static PlatformTask globalLater(Runnable runnable, long delayTicks) {
+        return requirePlatform().scheduleGlobalLater(runnable, delayTicks);
+    }
+
+    public static PlatformTask globalRepeating(Runnable runnable, long initialDelayTicks, long periodTicks) {
+        return requirePlatform().scheduleGlobalRepeating(runnable, initialDelayTicks, periodTicks);
+    }
+
+    public static PlatformTask region(Location location, Runnable runnable) {
+        return requirePlatform().scheduleAt(location, runnable);
+    }
+
+    public static PlatformTask regionLater(Location location, Runnable runnable, long delayTicks) {
+        return requirePlatform().scheduleAtLater(location, runnable, delayTicks);
+    }
+
+    public static PlatformTask regionRepeating(Location location, Runnable runnable,
+                                               long initialDelayTicks, long periodTicks) {
+        return requirePlatform().scheduleAtRepeating(location, runnable, initialDelayTicks, periodTicks);
+    }
+
+    public static PlatformTask entity(Entity entity, Runnable runnable) {
+        return requirePlatform().scheduleFor(entity, runnable);
+    }
+
+    public static PlatformTask entityLater(Entity entity, Runnable runnable, long delayTicks) {
+        return requirePlatform().scheduleForLater(entity, runnable, delayTicks);
+    }
+
+    public static PlatformTask entityRepeating(Entity entity, Runnable runnable,
+                                               long initialDelayTicks, long periodTicks) {
+        return requirePlatform().scheduleForRepeating(entity, runnable, initialDelayTicks, periodTicks);
     }
 
     public static Future<?> async(Runnable runnable) {
@@ -120,6 +163,7 @@ public final class SchedulerUtil {
         if (asyncExecutor != null) asyncExecutor.shutdown();
         asyncExecutor = null;
         plugin = null;
+        platform = null;
     }
 
     public static void onEvery(String name, Runnable task, TimeUnit unit, long period) {
@@ -127,7 +171,7 @@ public final class SchedulerUtil {
     }
 
     public static void bukkitSync(Runnable runnable) {
-        Bukkit.getServer().getScheduler().runTask(requirePlugin(), runnable);
+        global(runnable);
     }
 
     private static JavaPlugin requirePlugin() {
@@ -136,6 +180,10 @@ public final class SchedulerUtil {
 
     private static AsyncExecutor requireExecutor() {
         return Objects.requireNonNull(asyncExecutor, "SchedulerUtil has not been initialized");
+    }
+
+    private static Platform requirePlatform() {
+        return Objects.requireNonNull(platform, "SchedulerUtil has not been initialized");
     }
 
     public static final class AsyncExecutor {
