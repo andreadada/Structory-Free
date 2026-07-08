@@ -19,8 +19,8 @@
     <properties>
         <maven.compiler.release>16</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <dadagui.version>2.8.0-SNAPSHOT</dadagui.version>
-        <dadaplatform.version>26.1</dadaplatform.version>
+        <dadagui.version>2.8.1-SNAPSHOT</dadagui.version>
+        <dadaplatform.version>26.1.1</dadaplatform.version>
         <dadaconfig.version>1.6.2</dadaconfig.version>
         <paper.version>1.19.4-R0.1-SNAPSHOT</paper.version>
         <adventure.version>4.17.0</adventure.version>
