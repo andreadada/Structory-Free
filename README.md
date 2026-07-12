@@ -1,26 +1,26 @@
 # Structory Free
 
-Repository pubblico della versione gratuita di Structory.
+Public repository for the free version of Structory.
 
-## Moduli
+## Modules
 
-- `structory-core`: API, registro dei tipi, utilità temporali e scheduler condivisi con Structory Premium.
-- `structory-free`: plugin Bukkit/Paper gratuito e relative risorse.
+* `structory-core`: API, type registry, time utilities, and schedulers shared with Structory Premium.
+* `structory-free`: free Bukkit/Paper plugin and its related resources.
 
-## Dipendenze Dada
+## Dada Dependencies
 
-La build usa le versioni verificate sui rispettivi branch `main`:
+The build uses the versions verified on their respective `main` branches:
 
-- DadaGUIRework `2.8.0-SNAPSHOT`
-- DadaPlatform `26.1`
+* DadaGUIRework `2.8.0-SNAPSHOT`
+* DadaPlatform `26.1`
 
-Finché questi artefatti non vengono pubblicati in un registry Maven, devono essere presenti nel repository Maven locale.
+Until these artifacts are published to a Maven repository, they must be available in the local Maven repository.
 
-## Build e test
+## Build and Testing
 
 ```powershell
 mvn clean verify
 mvn clean install
 ```
 
-`verify` esegue i test di core e plugin. `install` pubblica `structory-core` nel repository Maven locale, rendendolo disponibile alla Premium. Il JAR della Free viene prodotto in `structory-free/target`.
+`verify` runs the core and plugin tests. `install` publishes `structory-core` to the local Maven repository, making it available to Structory Premium. The Free version JAR is generated in `structory-free/target`.
